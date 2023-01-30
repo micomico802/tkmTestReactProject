@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Button from '../components/Button';
 
 const RedPage = () => {
+  const navigate = useNavigate();
   const [count, setCount] = useState(0);
 
   const onClickPlusCounter = () => {
@@ -19,6 +21,16 @@ const RedPage = () => {
       <div className="Button-Container">
         <Button buttonName="+" onClickEvent={onClickPlusCounter} />
         <Button buttonName="-" onClickEvent={onClickMinusCounter} />
+      </div>
+      <div className="Button-Container">
+        <Button
+          buttonName="黄色ページへ"
+          onClickEvent={() => navigate("/yellow/")}
+        />
+        <Button
+          buttonName="緑ページへ"
+          onClickEvent={() => navigate("/")}
+        />
       </div>
     </>
   );

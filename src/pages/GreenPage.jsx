@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
-import Button from '../components/Button';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { decrease, increase } from "../redux/greenSlice";
+import Button from "../components/Button";
 import "../css/App.css";
 
 const GreenPage = () => {
-  const [count, setCount] = useState(0);
+  const navigate = useNavigate();
+
+  const count = useSelector((state) => state.counter.count);
+  const dispatch = useDispatch();
 
   const onClickPlusCounter = () => {
-    setCount((prevState) => prevState + 1);
+    dispatch(increase());
   };
 
   const onClickMinusCounter = () => {
-    setCount((prevState) => prevState - 1);
+    dispatch(decrease());
   };
 
   return (
@@ -21,8 +27,18 @@ const GreenPage = () => {
         <Button buttonName="+" onClickEvent={onClickPlusCounter} />
         <Button buttonName="-" onClickEvent={onClickMinusCounter} />
       </div>
+      <div className="Button-Container">
+        <Button
+          buttonName="黄色ページへ"
+          onClickEvent={() => navigate("/yellow/")}
+        />
+        <Button
+          buttonName="赤ページへ"
+          onClickEvent={() => navigate("/red/")}
+        />
+      </div>
     </>
   );
-}
+};
 
-export default GreenPage
+export default GreenPage;
